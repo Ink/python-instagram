@@ -99,6 +99,8 @@ def bind_method(**config):
                 raise InstagramClientError('Unable to parse response, not valid JSON.')
 
             api_responses = []
+            if not 'meta' in content_obj:
+                raise Exception("Meta not present. Object: %s" % content_obj)
             status_code = content_obj['meta']['code']
             if status_code == 200:
                 if not self.objectify_response:
